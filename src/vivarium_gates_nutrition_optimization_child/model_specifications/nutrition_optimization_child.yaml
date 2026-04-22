@@ -53,7 +53,7 @@ components:
             - MMSEffectOnGestationalAge()
             - BirthWeightShiftEffect()
             - SIS_with_birth_prevalence('diarrheal_diseases')
-            - RiskAttributableDisease('cause.moderate_protein_energy_malnutrition', 'risk_factor.child_wasting')
+            - RiskAttributableDisease('cause.other_protein_energy_malnutrition', 'risk_factor.child_wasting')
             - RiskAttributableDisease('cause.uncomplicated_severe_protein_energy_malnutrition', 'risk_factor.child_wasting')
             - RiskAttributableDisease('cause.complicated_severe_protein_energy_malnutrition', 'risk_factor.child_wasting')
             - MortalityObserver()
@@ -109,10 +109,9 @@ configuration:
             - "neonatal_lower_respiratory_infections"
             - "neonatal_diarrheal_diseases"
 
-    risk_attributable_disease.moderate_protein_energy_malnutrition:
+    risk_attributable_disease.other_protein_energy_malnutrition:
         data_sources:
             raw_disability_weight: 0.0
-            # Hack for 'other_protein_energy_malnutrition'
         threshold: ['cat2','cat2.5','cat3','cat4']
         mortality: True
         recoverable: True

@@ -174,33 +174,33 @@ class __ProteinEnergyMalnutrition(NamedTuple):
 PEM = __ProteinEnergyMalnutrition()
 
 
-class __ModerateProteinEnergyMalnutrition(NamedTuple):
+class __OtherProteinEnergyMalnutrition(NamedTuple):
     # Keys that will be loaded into the artifact. must have a colon type declaration
     DISABILITY_WEIGHT: TargetString = TargetString(
-        "cause.moderate_protein_energy_malnutrition.disability_weight"
+        "cause.other_protein_energy_malnutrition.disability_weight"
     )
     EMR: TargetString = TargetString(
-        "cause.moderate_protein_energy_malnutrition.excess_mortality_rate"
+        "cause.other_protein_energy_malnutrition.excess_mortality_rate"
     )
     CSMR: TargetString = TargetString(
-        "cause.moderate_protein_energy_malnutrition.cause_specific_mortality_rate"
+        "cause.other_protein_energy_malnutrition.cause_specific_mortality_rate"
     )
     RESTRICTIONS: TargetString = TargetString(
-        "cause.moderate_protein_energy_malnutrition.restrictions"
+        "cause.other_protein_energy_malnutrition.restrictions"
     )
 
     # Useful keys not for the artifact - distinguished by not using the colon type declaration
 
     @property
     def name(self):
-        return "moderate_protein_energy_malnutrition"
+        return "other_protein_energy_malnutrition"
 
     @property
     def log_name(self):
-        return "moderate protein energy malnutrition"
+        return "other protein energy malnutrition"
 
 
-MODERATE_PEM = __ModerateProteinEnergyMalnutrition()
+OTHER_PEM = __OtherProteinEnergyMalnutrition()
 
 
 class __SevereProteinEnergyMalnutrition(NamedTuple):
@@ -631,7 +631,7 @@ MAKE_ARTIFACT_KEY_GROUPS = [
     UNDERWEIGHT,
     CHILD_GROWTH_FAILURE,
     PEM,
-    MODERATE_PEM,
+    OTHER_PEM,
     UNCOMPLICATED_SEVERE_PEM,
     COMPLICATED_SEVERE_PEM,
     SAM_TREATMENT,

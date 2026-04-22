@@ -75,7 +75,7 @@ NATIONAL_LEVEL_DATA_KEYS = [
     data_keys.UNDERWEIGHT.DISTRIBUTION,
     data_keys.UNDERWEIGHT.CATEGORIES,
     data_keys.PEM.RESTRICTIONS,
-    data_keys.MODERATE_PEM.RESTRICTIONS,
+    data_keys.OTHER_PEM.RESTRICTIONS,
     data_keys.UNCOMPLICATED_SEVERE_PEM.RESTRICTIONS,
     data_keys.COMPLICATED_SEVERE_PEM.RESTRICTIONS,
     data_keys.SAM_TREATMENT.EXPOSURE,
@@ -216,10 +216,10 @@ def get_data(
         data_keys.PEM.EMR: load_pem_emr,
         data_keys.PEM.CSMR: load_pem_csmr,
         data_keys.PEM.RESTRICTIONS: load_pem_restrictions,
-        data_keys.MODERATE_PEM.DISABILITY_WEIGHT: load_pem_disability_weight,
-        data_keys.MODERATE_PEM.EMR: load_pem_emr,
-        data_keys.MODERATE_PEM.CSMR: load_pem_csmr,
-        data_keys.MODERATE_PEM.RESTRICTIONS: load_pem_restrictions,
+        data_keys.OTHER_PEM.DISABILITY_WEIGHT: load_pem_disability_weight,
+        data_keys.OTHER_PEM.EMR: load_pem_emr,
+        data_keys.OTHER_PEM.CSMR: load_pem_csmr,
+        data_keys.OTHER_PEM.RESTRICTIONS: load_pem_restrictions,
         
         data_keys.UNCOMPLICATED_SEVERE_PEM.EMR: load_pem_emr,
         data_keys.UNCOMPLICATED_SEVERE_PEM.CSMR: load_pem_csmr,
@@ -1288,7 +1288,7 @@ def load_cgf_paf(key: str, location: Union[str, List[int]]) -> pd.DataFrame:
 def load_pem_disability_weight(key: str, location: Union[str, List[int]]) -> pd.DataFrame:
     try:
         pem_sequelae = {
-            data_keys.MODERATE_PEM.DISABILITY_WEIGHT: [
+            data_keys.OTHER_PEM.DISABILITY_WEIGHT: [
                 sequelae.moderate_wasting_with_edema,
                 sequelae.moderate_wasting_without_edema,
             ],
@@ -1370,7 +1370,7 @@ def load_pem_emr(key: str, location: Union[str, List[int]]) -> pd.DataFrame:
     """Load state-specific mortality rates as EMR for PEM causes.
 
     Routes to the appropriate custom mortality rate based on the key:
-    - MODERATE_PEM.EMR -> mort_rate_other_causes
+    - OTHER_PEM.EMR -> mort_rate_other_causes
     - UNCOMPLICATED_SEVERE_PEM.EMR -> mort_rate_uncomplicated_sam
     - COMPLICATED_SEVERE_PEM.EMR -> mort_rate_complicated_sam
     - PEM.EMR -> weighted sum (population-level EMR)
@@ -1378,7 +1378,7 @@ def load_pem_emr(key: str, location: Union[str, List[int]]) -> pd.DataFrame:
     mort_rates = _load_mortality_rates(location)
 
     emr_mapping = {
-        data_keys.MODERATE_PEM.EMR: "mort_rate_other_causes",
+        data_keys.OTHER_PEM.EMR: "mort_rate_other_causes",
         data_keys.UNCOMPLICATED_SEVERE_PEM.EMR: "mort_rate_uncomplicated_sam",
         data_keys.COMPLICATED_SEVERE_PEM.EMR: "mort_rate_complicated_sam",
     }
@@ -1421,7 +1421,7 @@ def load_pem_csmr(key: str, location: Union[str, List[int]]) -> pd.DataFrame:
     csmr_mapping = {
         data_keys.COMPLICATED_SEVERE_PEM.CSMR: csmr_complicated,
         data_keys.UNCOMPLICATED_SEVERE_PEM.CSMR: csmr_uncomplicated,
-        data_keys.MODERATE_PEM.CSMR: csmr_other,
+        data_keys.OTHER_PEM.CSMR: csmr_other,
         data_keys.PEM.CSMR: csmr_complicated + csmr_uncomplicated + csmr_other,
     }
 
