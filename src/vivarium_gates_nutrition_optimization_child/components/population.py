@@ -179,7 +179,7 @@ class MortalityLineList(Mortality):
 
     def calculate_mortality_rate(self, index: pd.Index) -> pd.DataFrame:
         """Compute the mortality rate, returning zero for simulants older than 1 month."""
-        ages = self.population_view.get(index)["age"]
+        ages = self.population_view.get(index, "age")
         neonatal = ages[ages <= NEONATAL_END_AGE].index
         result = pd.DataFrame({"other_causes": 0.0}, index=index)
         if not neonatal.empty:
