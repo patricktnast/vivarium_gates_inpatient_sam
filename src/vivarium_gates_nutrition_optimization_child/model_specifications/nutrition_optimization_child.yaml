@@ -146,13 +146,10 @@ configuration:
             include: ['wasting_state']
         diarrheal_diseases:
             include: ['wasting_state']
+        disability:
+            include: ['wasting_state']
         excluded_categories:
             cause_of_death:
                 - 'stillborn'
             disability:
                 - 'all_causes'
-                - 'mild_child_wasting'
-                - 'better_moderate_acute_malnutrition'
-                - 'worse_moderate_acute_malnutrition'
-                - 'uncomplicated_severe_acute_malnutrition'
-                - 'complicated_severe_acute_malnutrition'
