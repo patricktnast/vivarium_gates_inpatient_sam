@@ -1382,7 +1382,14 @@ def load_pem_emr(key: str, location: Union[str, List[int]]) -> pd.DataFrame:
         data_keys.UNCOMPLICATED_SEVERE_PEM.EMR: "mort_rate_uncomplicated_sam",
         data_keys.COMPLICATED_SEVERE_PEM.EMR: "mort_rate_complicated_sam",
     }
-    return mort_rates[emr_mapping[key]]
+
+    if key in emr_mapping:
+        return mort_rates[emr_mapping[key]]
+    elif key == data_keys.PEM.EMR:
+        # Return the standard GBD EMR for backward compatibility
+        return load_standard_data(data_keys.PEM.EMR, location)
+    else:
+        raise ValueError(f"Unrecognized key {key}")
 
 def load_pem_csmr(key: str, location: Union[str, List[int]]) -> pd.DataFrame:
     """Compute PEM CSMR from custom mortality rates and wasting prevalence.
