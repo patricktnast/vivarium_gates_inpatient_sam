@@ -62,13 +62,13 @@ class ResultsStratifier(ResultsStratifier_):
         """Register each desired stratification with calls to _setup_stratification"""
         super().register_stratifications(builder)
 
-        # builder.results.register_stratification(
-        #     "wasting_state",
-        #     [category.value for category in data_keys.ChildWastingCategories],
-        #     mapper=self.child_wasting_stratification_mapper,
-        #     is_vectorized=True,
-        #     requires_attributes=["child_wasting.exposure"],
-        # )
+        builder.results.register_stratification(
+            "wasting_state",
+            [category.value for category in data_keys.ChildWastingCategories],
+            mapper=self.child_wasting_stratification_mapper,
+            is_vectorized=True,
+            requires_attributes=["child_wasting.exposure"],
+        )
         # builder.results.register_stratification(
         #     "stunting_state",
         #     [category.value for category in data_keys.CGFCategories],
