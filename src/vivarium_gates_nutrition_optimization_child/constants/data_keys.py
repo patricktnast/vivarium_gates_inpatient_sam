@@ -232,6 +232,54 @@ class __SevereProteinEnergyMalnutrition(NamedTuple):
 SEVERE_PEM = __SevereProteinEnergyMalnutrition()
 
 
+class __UncomplicatedSevereProteinEnergyMalnutrition(NamedTuple):
+    # Keys that will be loaded into the artifact. must have a colon type declaration
+    EMR: TargetString = TargetString(
+        "cause.uncomplicated_severe_protein_energy_malnutrition.excess_mortality_rate"
+    )
+    CSMR: TargetString = TargetString(
+        "cause.uncomplicated_severe_protein_energy_malnutrition.cause_specific_mortality_rate"
+    )
+    RESTRICTIONS: TargetString = TargetString(
+        "cause.uncomplicated_severe_protein_energy_malnutrition.restrictions"
+    )
+
+    @property
+    def name(self):
+        return "uncomplicated_severe_protein_energy_malnutrition"
+
+    @property
+    def log_name(self):
+        return "uncomplicated severe protein energy malnutrition"
+
+
+UNCOMPLICATED_SEVERE_PEM = __UncomplicatedSevereProteinEnergyMalnutrition()
+
+
+class __ComplicatedSevereProteinEnergyMalnutrition(NamedTuple):
+    # Keys that will be loaded into the artifact. must have a colon type declaration
+    EMR: TargetString = TargetString(
+        "cause.complicated_severe_protein_energy_malnutrition.excess_mortality_rate"
+    )
+    CSMR: TargetString = TargetString(
+        "cause.complicated_severe_protein_energy_malnutrition.cause_specific_mortality_rate"
+    )
+    RESTRICTIONS: TargetString = TargetString(
+        "cause.complicated_severe_protein_energy_malnutrition.restrictions"
+    )
+
+    @property
+    def name(self):
+        return "complicated_severe_protein_energy_malnutrition"
+
+    @property
+    def log_name(self):
+        return "complicated severe protein energy malnutrition"
+
+
+COMPLICATED_SEVERE_PEM = __ComplicatedSevereProteinEnergyMalnutrition()
+
+
 ################
 # Risk Factors #
 ################
@@ -584,7 +632,8 @@ MAKE_ARTIFACT_KEY_GROUPS = [
     CHILD_GROWTH_FAILURE,
     PEM,
     MODERATE_PEM,
-    SEVERE_PEM,
+    UNCOMPLICATED_SEVERE_PEM,
+    COMPLICATED_SEVERE_PEM,
     SAM_TREATMENT,
     MAM_TREATMENT,
     LBWSG,
