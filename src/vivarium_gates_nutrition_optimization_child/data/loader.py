@@ -216,7 +216,6 @@ def get_data(
         data_keys.PEM.EMR: load_pem_emr,
         data_keys.PEM.CSMR: load_pem_csmr,
         data_keys.PEM.RESTRICTIONS: load_pem_restrictions,
-        data_keys.OTHER_PEM.DISABILITY_WEIGHT: load_pem_disability_weight,
         data_keys.OTHER_PEM.EMR: load_pem_emr,
         data_keys.OTHER_PEM.CSMR: load_pem_csmr,
         data_keys.OTHER_PEM.RESTRICTIONS: load_pem_restrictions,
@@ -1283,38 +1282,6 @@ def load_cgf_paf(key: str, location: Union[str, List[int]]) -> pd.DataFrame:
     )
     data = data[metadata.ARTIFACT_COLUMNS]
     return data.sort_index()
-
-
-def load_pem_disability_weight(key: str, location: Union[str, List[int]]) -> pd.DataFrame:
-    try:
-        pem_sequelae = {
-            data_keys.OTHER_PEM.DISABILITY_WEIGHT: [
-                sequelae.moderate_wasting_with_edema,
-                sequelae.moderate_wasting_without_edema,
-            ],
-            data_keys.SEVERE_PEM.DISABILITY_WEIGHT: [
-                sequelae.severe_wasting_with_edema,
-                sequelae.severe_wasting_without_edema,
-            ],
-        }[key]
-    except KeyError:
-        raise ValueError(f"Unrecognized key {key}")
-
-    prevalence_disability_weight = []
-    state_prevalence = []
-    for s in pem_sequelae:
-        sequela_prevalence = interface.get_measure(
-            s, "prevalence", location, metadata.GBD_EXTRACT_YEAR
-        )
-        sequela_disability_weight = interface.get_measure(
-            s, "disability_weight", location, metadata.GBD_EXTRACT_YEAR
-        )
-
-        prevalence_disability_weight += [sequela_prevalence * sequela_disability_weight]
-        state_prevalence += [sequela_prevalence]
-
-    disability_weight = (sum(prevalence_disability_weight) / sum(state_prevalence)).fillna(0)
-    return disability_weight
 
 
 def _load_mortality_rates(location: Union[str, List[int]]) -> Dict[str, pd.DataFrame]:

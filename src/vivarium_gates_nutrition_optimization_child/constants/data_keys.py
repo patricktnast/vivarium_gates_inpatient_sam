@@ -176,9 +176,6 @@ PEM = __ProteinEnergyMalnutrition()
 
 class __OtherProteinEnergyMalnutrition(NamedTuple):
     # Keys that will be loaded into the artifact. must have a colon type declaration
-    DISABILITY_WEIGHT: TargetString = TargetString(
-        "cause.other_protein_energy_malnutrition.disability_weight"
-    )
     EMR: TargetString = TargetString(
         "cause.other_protein_energy_malnutrition.excess_mortality_rate"
     )
@@ -201,36 +198,6 @@ class __OtherProteinEnergyMalnutrition(NamedTuple):
 
 
 OTHER_PEM = __OtherProteinEnergyMalnutrition()
-
-
-class __SevereProteinEnergyMalnutrition(NamedTuple):
-    # Keys that will be loaded into the artifact. must have a colon type declaration
-    DISABILITY_WEIGHT: TargetString = TargetString(
-        "cause.severe_protein_energy_malnutrition.disability_weight"
-    )
-    EMR: TargetString = TargetString(
-        "cause.severe_protein_energy_malnutrition.excess_mortality_rate"
-    )
-    CSMR: TargetString = TargetString(
-        "cause.severe_protein_energy_malnutrition.cause_specific_mortality_rate"
-    )
-    RESTRICTIONS: TargetString = TargetString(
-        "cause.severe_protein_energy_malnutrition.restrictions"
-    )
-
-    # Useful keys not for the artifact - distinguished by not using the colon type declaration
-
-    @property
-    def name(self):
-        return "severe_protein_energy_malnutrition"
-
-    @property
-    def log_name(self):
-        return "severe protein energy malnutrition"
-
-
-SEVERE_PEM = __SevereProteinEnergyMalnutrition()
-
 
 class __UncomplicatedSevereProteinEnergyMalnutrition(NamedTuple):
     # Keys that will be loaded into the artifact. must have a colon type declaration
