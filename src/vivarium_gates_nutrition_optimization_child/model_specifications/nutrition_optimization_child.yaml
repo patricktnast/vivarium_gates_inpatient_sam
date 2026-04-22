@@ -112,6 +112,7 @@ configuration:
     risk_attributable_disease.moderate_protein_energy_malnutrition:
         data_sources:
             raw_disability_weight: 0.0
+            # Hack for 'other_protein_energy_malnutrition'
         threshold: ['cat2','cat2.5','cat3','cat4']
         mortality: True
         recoverable: True
