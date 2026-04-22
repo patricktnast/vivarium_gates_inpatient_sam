@@ -151,7 +151,8 @@ class ResultsStratifier(ResultsStratifier_):
             "cat3": data_keys.ChildWastingCategories.MILD.value,
             "cat2.5": data_keys.ChildWastingCategories.BETTER_MODERATE.value,
             "cat2": data_keys.ChildWastingCategories.WORSE_MODERATE.value,
-            "cat1": data_keys.ChildWastingCategories.SEVERE.value,
+            "cat1_uncomplicated": data_keys.ChildWastingCategories.UNCOMPLICATED_SEVERE.value,
+            "cat1_complicated": data_keys.ChildWastingCategories.COMPLICATED_SEVERE.value,
         }
         return pop.squeeze(axis=1).map(mapper)
 
