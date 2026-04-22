@@ -110,11 +110,21 @@ configuration:
             - "neonatal_diarrheal_diseases"
 
     risk_attributable_disease.moderate_protein_energy_malnutrition:
-        threshold: ['cat2','cat2.5']
+        data_sources:
+            raw_disability_weight: 0.0
+        threshold: ['cat2','cat2.5','cat3','cat4']
         mortality: True
         recoverable: True
-    risk_attributable_disease.severe_protein_energy_malnutrition:
-        threshold: ['cat1_uncomplicated', 'cat1_complicated']
+    risk_attributable_disease.uncomplicated_severe_protein_energy_malnutrition:
+        data_sources:
+            raw_disability_weight: 0.0
+        threshold: ['cat1_uncomplicated']
+        mortality: True
+        recoverable: True
+    risk_attributable_disease.complicated_severe_protein_energy_malnutrition:
+        data_sources:
+            raw_disability_weight: 0.0
+        threshold: ['cat1_complicated']
         mortality: True
         recoverable: True
 
