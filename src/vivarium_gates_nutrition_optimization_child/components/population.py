@@ -178,7 +178,12 @@ class MortalityLineList(Mortality):
         self.population_view.initialize(pop_update)
 
     def calculate_mortality_rate(self, index: pd.Index) -> pd.DataFrame:
-        """Compute the mortality rate, returning zero for simulants older than 1 month."""
+        """Compute the mortality rate, returning zero for simulants older than 1 month.
+        
+        This is to remove the 'standard' ACMR background mortality from the simulation,
+        given that background mortality is calculated via calibration and implemented
+        via the PEM model.
+        """
         ages = self.population_view.get(index, "age")
         neonatal = ages[ages <= NEONATAL_END_AGE].index
         result = pd.DataFrame({"other_causes": 0.0}, index=index)
